@@ -5,6 +5,8 @@ import Team from './Team/Team';
 import uuidv1 from 'uuid/v1';
 import Modal from './Modal/Modal';
 import {CloseButton}from './Modal/components';
+import axios from 'axios';
+import Loader from './Loader/Loader';
 import './App.css';
 
 
@@ -25,11 +27,27 @@ const initialMemberState = {
   role: "",
 }
 
+const base_url = "http://localhost:5000/api"
+
 function App() {
 
-  const [memberList, setTeamList] = useState(initialMemberList)
+  const [memberList, setTeamList] = useState([])
   const [member, setMember] = useState(initialMemberState);
-  const [formModalOpen, setFormModalStatus] = useState(false)
+  const [formModalOpen, setFormModalStatus] = useState(false);
+
+  useEffect(()=>{
+    const getMembers = ()=>{
+      axios
+      .get(`${base_url}/members`)
+      .then(response => {
+        console.log(response.data);
+        const list = response.data;
+        setTeamList(list)
+      })
+    }
+
+    getMembers();
+  },[])
 
   const openFormModal = () => {
     setFormModalStatus(true);
@@ -87,6 +105,8 @@ function App() {
     openFormModal();
     setMember(member);
   }
+
+  if(memberList.length === 0) return <Loader />
 
   return (
     <div className="App">

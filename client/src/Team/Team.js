@@ -12,6 +12,7 @@ const TeamList = ({listProperties,memberList,openFormModal,updateMember}) => (
         {listProperties.map((heading)=>{
           return <Table.HeaderCell key={heading}>{heading}</Table.HeaderCell>
         })}
+        <Table.HeaderCell ><Button onClick={openFormModal} color="grey" circular icon='plus' /></Table.HeaderCell>
       </Table.Row>
     </Table.Header>
 
@@ -19,14 +20,7 @@ const TeamList = ({listProperties,memberList,openFormModal,updateMember}) => (
       {
         memberList.map((props,key)=> <TeamMember key={props.id} {...props} index={key + 1} updateMember={()=>updateMember(props)} />
       )}
-      <Table.Row>
-        <Table.Cell>
-            {/*<Label ribbon>{index}</Label>*/}
-        </Table.Cell>
-        <Table.Cell></Table.Cell>
-        <Table.Cell></Table.Cell>
-        <Table.Cell><Button onClick={openFormModal} color="grey" circular icon='plus' /></Table.Cell>
-    </Table.Row>
+
     </Table.Body>
 
     <Pagination />

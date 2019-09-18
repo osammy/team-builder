@@ -2,6 +2,16 @@
   padding-top: 5px;
 }
 
+.page-loader {
+  /*style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}*/
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+}
+
+
 .App-form-container {
   border:0.5px solid #ccc;
   border-radius:5px;
