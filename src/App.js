@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import Form from './Form/Form';
 import Team from './Team/Team';
 import uuidv1 from 'uuid/v1';
-import Modal from './Modal/Modal'
+import Modal from './Modal/Modal';
 import './App.css';
 
 
