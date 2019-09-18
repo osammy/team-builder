@@ -4,7 +4,7 @@ import TeamMember from './TeamMember';
 import Pagination from '../Pagination/Pagination';
 
 
-const TeamList = ({listProperties,memberList}) => (
+const TeamList = ({listProperties,memberList,openFormModal,updateMember}) => (
   <Table celled >
     <Table.Header>
       <Table.Row>
@@ -16,7 +16,7 @@ const TeamList = ({listProperties,memberList}) => (
 
     <Table.Body>
       {
-        memberList.map((props,key)=> <TeamMember key={props.id} {...props} index={key + 1} />
+        memberList.map((props,key)=> <TeamMember key={props.id} {...props} index={key + 1} updateMember={updateMember} />
       )}
       <Table.Row>
         <Table.Cell>
@@ -24,7 +24,7 @@ const TeamList = ({listProperties,memberList}) => (
         </Table.Cell>
         <Table.Cell></Table.Cell>
         <Table.Cell></Table.Cell>
-        <Table.Cell><Button circular icon='settings' /></Table.Cell>
+        <Table.Cell><Button onClick={openFormModal} color="grey" circular icon='plus' /></Table.Cell>
     </Table.Row>
     </Table.Body>
 

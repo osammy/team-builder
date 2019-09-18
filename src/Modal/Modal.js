@@ -1,22 +1,35 @@
 import React from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
+import BgImg from '../Images/brushed-alum.png';
 
-const ModalContainer = (props) => (
-  <Modal trigger={<Button>Show Modal</Button>}>
-    {/*<Modal.Header>Select a Photo</Modal.Header>
+
+const ModalContainer = (props) => {
+  const {dimmer, open, closeFormModal, size, modalHeader, contentHeader, closeOnDimmerClick} = props;
+  
+  return (
+  
+  <Modal 
+    dimmer={dimmer ? dimmer:true} 
+    open={open} 
+    size={size ? size:"tiny"} 
+    onClose={closeFormModal}
+    closeOnDimmerClick={ closeOnDimmerClick ?  closeOnDimmerClick : true}
+   //trigger={<Button>Show Modal</Button>}
+    closeIcon
+  >
+    {/*<Modal.Header >
+      <Button ><Icon name="close right" /></Button>
+    </Modal.Header>*/}
+    <Modal.Header>{modalHeader ? modalHeader : ""}</Modal.Header>
     <Modal.Content image>
-      <Image wrapped size='medium' src='/images/avatar/large/rachel.png' />
+      <Image wrapped size='medium' src={BgImg} />
       <Modal.Description>
-        <Header>Default Profile Image</Header>
-        <p>
-          We've found the following gravatar image associated with your e-mail
-          address.
-        </p>
-        <p>Is it okay to use this photo?</p>
+        <Header>{contentHeader ? contentHeader : ""}</Header>
+        {props.children}
       </Modal.Description>
-    </Modal.Content>*/}
-    {props.children}
+    </Modal.Content>
+    {/*</div>*/}
   </Modal>
-)
+)}
 
 export default ModalContainer

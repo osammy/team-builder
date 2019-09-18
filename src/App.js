@@ -4,6 +4,7 @@ import Form from './Form/Form';
 import Team from './Team/Team';
 import uuidv1 from 'uuid/v1';
 import Modal from './Modal/Modal';
+import {CloseButton}from './Modal/components';
 import './App.css';
 
 
@@ -15,7 +16,7 @@ const initialMemberList = [
     role: "software developer"
   }
 ]
-const listProperties = ["Id","Name","Email","Role"];
+const listProperties = ["Id", "Name", "Email", "Role"];
 
 const initialMemberState = {
   id: "",
@@ -27,18 +28,30 @@ const initialMemberState = {
 function App() {
 
   const [memberList, setTeamList] = useState(initialMemberList)
-  const [member, setMember] = useState(initialMemberState)
+  const [member, setMember] = useState(initialMemberState);
+  const [formModalOpen, setFormModalStatus] = useState(false)
 
-  useEffect(
-    () => { console.log(memberList) }, [memberList]
-  )
+  const openFormModal = () => {
+    setFormModalStatus(true);
+  }
+
+  const closeFormModal = () => {
+    setFormModalStatus(false);
+  }
 
   const addToMemberList = () => {
-    const id = { id: uuidv1() };
-    const newMember = { ...member, ...id }
+
+    let newMember = {...member};
+    if (member.id === "") {
+      const id = { id: uuidv1() };
+      newMember = { ...member, ...id }
+    }
     const newMemberList = memberList.concat(newMember);
     setTeamList(newMemberList);
     setMember(initialMemberState);
+  }
+
+  const updateMember = () => {
 
   }
 
@@ -51,28 +64,43 @@ function App() {
     });
   }
 
+  const openModalForEditing = (member) => {
+    openFormModal();
+    setMember(member);
+  }
+
   // const onFormSubmit = () =>{
 
   // }
-
+  // onClose={setFormModalClose}
 
   return (
     <div className="App">
-      <div className="App-form-container">
+      <div className="App-team-container">
+        <Team
+          listProperties={listProperties}
+          memberList={memberList}
+          openFormModal={openFormModal}
+          updateMember={openModalForEditing}
+        />
+      </div>
+      <Modal 
+        size="tiny" 
+        open={formModalOpen} 
+        dimmer="blurring" 
+        closeOnDimmerClick={false}
+        modalHeader="Membership"
+        contentHeader="Add Member"
+        closeFormModal={closeFormModal}
+      >
         <Form
           addToMemberList={addToMemberList}
           onFieldChange={onFieldChange}
           onFormSubmit={addToMemberList}
           memberDetail={member}
         />
-      </div><br />
-      <div className="App-team-container">
-        <Team
-          listProperties={listProperties}
-          memberList={memberList}
-        />
-      </div>
-      <Modal><p>hhhhh</p></Modal>
+        {/*</div>*/}
+      </Modal>
     </div>
   );
 }
