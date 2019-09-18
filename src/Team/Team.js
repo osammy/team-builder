@@ -16,7 +16,7 @@ const TeamList = ({listProperties,memberList,openFormModal,updateMember}) => (
 
     <Table.Body>
       {
-        memberList.map((props,key)=> <TeamMember key={props.id} {...props} index={key + 1} updateMember={updateMember} />
+        memberList.map((props,key)=> <TeamMember key={props.id} {...props} index={key + 1} updateMember={()=>updateMember(props)} />
       )}
       <Table.Row>
         <Table.Cell>

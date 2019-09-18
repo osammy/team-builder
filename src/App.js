@@ -46,13 +46,30 @@ function App() {
       const id = { id: uuidv1() };
       newMember = { ...member, ...id }
     }
+
+    if(checkIfExist()) {
+      updateMember();
+      return;
+    }
     const newMemberList = memberList.concat(newMember);
     setTeamList(newMemberList);
     setMember(initialMemberState);
   }
 
-  const updateMember = () => {
+  const checkIfExist = () => {
+    let found =  false;
+    found = memberList.find(el => (el.id !== "" && member.id));
+    
+    if(found) found = true;
+    console.log(found)
+    return found;
+  }
 
+  const updateMember = () => {
+    const filteredMembers = memberList.filter(el => el.id !== member.id);
+    const updatedMembers = [...filteredMembers,member] 
+    setTeamList(updatedMembers);
+    closeFormModal();
   }
 
   const onFieldChange = (e) => {
