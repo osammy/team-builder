@@ -1,24 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
+import Form from './Form/Form';
+import Team from './Team/Team';
 import './App.css';
 
+
+const initialMemberList = [
+  {
+    name:"Durotolu",
+    email:"dorotolu@gmail.com",
+    role:"software developer"
+  }
+]
+const listProperties = Object.keys(initialMemberList[0])
+
+
 function App() {
+
+const [memberList, setTeamList] = useState(initialMemberList)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-form-container">
+      <Team 
+        listProperties={listProperties}
+        className="App-form-container"
+        memberList={memberList} 
+      />
+      <Form />
+      </div>
     </div>
   );
 }
