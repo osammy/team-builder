@@ -46,7 +46,10 @@ function App() {
       const id = { id: uuidv1() };
       newMember = { ...member, ...id }
     }
-
+    /*
+      Since i am using a singlefunction for editing, then inuse this to check
+      if it already exists, if exists update member and exit
+    */
     if(checkIfExist()) {
       updateMember();
       return;
@@ -61,7 +64,6 @@ function App() {
     found = memberList.find(el => (el.id !== "" && member.id));
     
     if(found) found = true;
-    console.log(found)
     return found;
   }
 
@@ -85,11 +87,6 @@ function App() {
     openFormModal();
     setMember(member);
   }
-
-  // const onFormSubmit = () =>{
-
-  // }
-  // onClose={setFormModalClose}
 
   return (
     <div className="App">

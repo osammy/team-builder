@@ -5,7 +5,8 @@ import Pagination from '../Pagination/Pagination';
 
 
 const TeamList = ({listProperties,memberList,openFormModal,updateMember}) => (
-  <Table celled >
+  // <Table celled >
+  <Table>
     <Table.Header>
       <Table.Row>
         {listProperties.map((heading)=>{
